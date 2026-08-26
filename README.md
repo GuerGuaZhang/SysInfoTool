@@ -4,6 +4,10 @@
 - `*.html` —— **面向人阅读的界面**：按《澄明情报报告》设计语言渲染
 - `*.json` —— **面向程序/AI 解析**：结构化规范 v1.1，具名字段 + 分组排序 + 美化缩进
 
+<p align="center">
+  <img src="preview_gui.png" width="500" alt="GUI 界面预览">
+</p>
+
 ## 快速开始
 
 1. 把 `SysInfoTool.exe` 拷到目标机器任意目录（U盘也可以，无需安装）；
