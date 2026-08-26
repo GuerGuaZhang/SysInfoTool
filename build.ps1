@@ -38,12 +38,14 @@ if (Test-Path $out) {
     $oldVer = (Get-Item $out).VersionInfo.FileVersion
     if ([string]::IsNullOrEmpty($oldVer)) { $oldVer = "unknown" }
     $backupName = "SysInfoTool_v${oldVer}_backup.exe"
-    $backupPath = Join-Path $OutDir $backupName
+    $backupDir = Join-Path $root "backups"
+    New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    $backupPath = Join-Path $backupDir $backupName
     if (-not (Test-Path $backupPath)) {
         Copy-Item $out $backupPath -Force
-        Write-Host ("已备份旧版本 -> {0}" -f $backupName)
+        Write-Host ("已备份旧版本 -> backups\{0}" -f $backupName)
     } else {
-        Write-Host ("备份 {0} 已存在，跳过" -f $backupName)
+        Write-Host ("备份 backups\{0} 已存在，跳过" -f $backupName)
     }
 }
 

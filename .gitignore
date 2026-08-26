@@ -11,7 +11,7 @@ bin/
 obj/
 
 # ---- 旧版本备份 ----
-*_backup.exe
+backups/
 
 # ---- 运行时生成的报告 ----
 *.html
