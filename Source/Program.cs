@@ -12,6 +12,7 @@ namespace SysInfoTool
         /// 用法：
         ///   无参数            → 图形界面（默认）
         ///   --console         → 控制台模式（无界面，直接生成）
+        ///   --json-only       → 只输出 JSON，不生成 HTML（配合 --console 使用）
         ///   --no-mask         → 关闭脱敏（默认开启）
         ///   --skip-scan       → 跳过文件夹体积统计
         ///   --out 目录        → 指定报告输出目录
@@ -26,6 +27,7 @@ namespace SysInfoTool
             {
                 string a = arg.ToLowerInvariant();
                 if (a == "--console") console = true;
+                else if (a == "--json-only") options.JsonOnly = true;
                 else if (a == "--no-mask") options.Mask = false;
                 else if (a == "--mask") options.Mask = true;
                 else if (a == "--skip-scan") options.SkipScan = true;
@@ -83,16 +85,9 @@ namespace SysInfoTool
                 Console.WriteLine("完成，耗时 " + result.Model.DurationSeconds + " 秒。");
                 if (result.Model.Failures.Count > 0)
                     Console.WriteLine("注意：有 " + result.Model.Failures.Count + " 项采集失败（详见报告末尾），建议以管理员身份重试。");
-                Console.WriteLine("HTML 报告：" + result.HtmlPath);
+                if (result.HtmlPath != null)
+                    Console.WriteLine("HTML 报告：" + result.HtmlPath);
                 Console.WriteLine("JSON 数据：" + result.JsonPath);
-
-                // 控制台模式下也自动打开报告
-                try
-                {
-                    System.Diagnostics.Process.Start(
-                        new System.Diagnostics.ProcessStartInfo(result.HtmlPath) { UseShellExecute = true });
-                }
-                catch { }
                 return 0;
             }
             catch (Exception ex)
@@ -109,12 +104,12 @@ namespace SysInfoTool
             Console.WriteLine("用法：SysInfoTool.exe [参数]");
             Console.WriteLine("  无参数        打开图形界面");
             Console.WriteLine("  --console     控制台模式，直接生成报告");
+            Console.WriteLine("  --json-only   只输出 JSON（配合 --console 使用）");
             Console.WriteLine("  --no-mask     关闭脱敏（默认开启：隐藏序列号/MAC/IP/用户名）");
             Console.WriteLine("  --skip-scan   跳过文件夹体积统计");
             Console.WriteLine("  --out=目录    指定报告输出根目录");
             Console.WriteLine();
             Console.WriteLine("输出结构：");
-            Console.WriteLine("  <输出目录>/<电脑名>/<电脑名>_日期时间.html");
             Console.WriteLine("  <输出目录>/<电脑名>/<电脑名>_日期时间.json");
             Console.WriteLine("  无法获取电脑名时，归入「未知」文件夹");
         }

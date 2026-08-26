@@ -13,6 +13,7 @@ namespace SysInfoTool.Core
         {
             public bool Mask = true;          // 默认脱敏
             public bool SkipScan = false;
+            public bool JsonOnly = false;     // 只输出 JSON，不生成 HTML
             public string OutputDir;          // null = exe 所在目录，失败回退桌面；报告自动存入 子目录/电脑名/ 下
         }
 
@@ -72,12 +73,19 @@ namespace SysInfoTool.Core
             Directory.CreateDirectory(computerDir);
             string stamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             string baseName = SafeComputerName + "_" + stamp;
-            string htmlPath = Path.Combine(computerDir, baseName + ".html");
+            string htmlPath = null;
             string jsonPath = Path.Combine(computerDir, baseName + ".json");
 
-            string html = HtmlReportBuilder.Build(ctx.Model);
-            File.WriteAllText(htmlPath, html, new System.Text.UTF8Encoding(true));
+            // JSON 始终生成
             File.WriteAllText(jsonPath, ReportJson.Serialize(ctx.Model), new System.Text.UTF8Encoding(true));
+
+            // HTML 可选
+            if (!_options.JsonOnly)
+            {
+                htmlPath = Path.Combine(computerDir, baseName + ".html");
+                string html = HtmlReportBuilder.Build(ctx.Model);
+                File.WriteAllText(htmlPath, html, new System.Text.UTF8Encoding(true));
+            }
 
             return new Result { HtmlPath = htmlPath, JsonPath = jsonPath, Model = ctx.Model };
         }

@@ -1,12 +1,12 @@
 ---
 name: sysinfo-report
-description: 生成电脑硬件/系统/软件/网络信息的 HTML 和 JSON 报告。用于系统排查、硬件盘点、故障诊断。
+description: 采集当前电脑的硬件/系统/软件/网络信息，生成 JSON 数据供 AI 分析。用于系统排查、硬件盘点、故障诊断。
 whenToUse: 当用户需要查看电脑配置信息、生成系统报告、排查硬件/系统/软件问题、或需要导出电脑信息时使用。
 ---
 
 # SysInfoTool 技能插件
 
-采集当前电脑的硬件、系统、软件、使用痕迹与网络信息，生成自包含 HTML 报告和结构化 JSON 数据。
+采集当前电脑的硬件、系统、软件、使用痕迹与网络信息，生成结构化 JSON 数据供 AI 分析。
 
 ## 前置条件
 
@@ -17,26 +17,25 @@ whenToUse: 当用户需要查看电脑配置信息、生成系统报告、排查
 ## 调用方式
 
 ```powershell
-# 生成报告（默认脱敏，自动打开浏览器）
-& 'SysInfoTool.exe' --console
+# 采集并输出 JSON（推荐，AI 直接读取）
+& 'SysInfoTool.exe' --console --json-only
 
 # 不脱敏（显示完整序列号/MAC/IP/用户名）
-& 'SysInfoTool.exe' --console --no-mask
+& 'SysInfoTool.exe' --console --json-only --no-mask
 
 # 指定输出目录
-& 'SysInfoTool.exe' --console --out=D:\报告
+& 'SysInfoTool.exe' --console --json-only --out=D:\报告
 
-# 跳过文件夹体积统计（加速）
-& 'SysInfoTool.exe' --console --skip-scan
+# 同时生成 HTML 和 JSON
+& 'SysInfoTool.exe' --console
 ```
 
 ## 输出结构
 
-报告保存在 exe 所在目录的 `<电脑名>/` 子文件夹下：
+JSON 文件保存在 exe 所在目录的 `<电脑名>/` 子文件夹下：
 
 ```
-<输出目录>/<电脑名>/<电脑名>_日期时间.html   ← 面向人的可视化报告
-<输出目录>/<电脑名>/<电脑名>_日期时间.json   ← 面向程序的结构化数据
+<输出目录>/<电脑名>/<电脑名>_日期时间.json
 ```
 
 ## 采集内容（26 个模块）
