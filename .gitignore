@@ -17,6 +17,7 @@ backups/
 *.html
 *.json
 !README.md
+!dsh-plugin/package.json
 
 # ---- IDE / 编辑器 ----
 .vs/

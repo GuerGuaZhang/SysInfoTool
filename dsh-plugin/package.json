@@ -1,0 +1,19 @@
+{
+  "name": "dsh-sysinfo-report",
+  "version": "1.0.0",
+  "description": "DSH 技能插件：生成电脑硬件/系统/软件/网络信息报告",
+  "keywords": ["dsh", "dsh-plugin", "sysinfo", "system-report", "hardware"],
+  "author": "GuerGuaZhang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuerGuaZhang/SysInfoTool.git",
+    "directory": "dsh-plugin"
+  },
+  "files": [
+    "SKILL.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
