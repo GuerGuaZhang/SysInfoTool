@@ -1,0 +1,36 @@
+# =============================================================
+# SysInfoTool .gitignore
+# =============================================================
+
+# ---- 构建产物 ----
+*.exe
+*.pdb
+*.cache
+*.dll
+bin/
+obj/
+
+# ---- 旧版本备份 ----
+*_backup.exe
+
+# ---- 运行时生成的报告 ----
+*.html
+*.json
+!README.md
+
+# ---- IDE / 编辑器 ----
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# ---- 系统文件 ----
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# ---- mimocode ----
+.mimocode/
