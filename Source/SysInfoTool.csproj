@@ -10,7 +10,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <AssemblyTitle>电脑信息报告工具</AssemblyTitle>
     <Description>生成电脑硬件、系统、软件信息的中文 HTML 报告</Description>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <ApplicationManifest></ApplicationManifest>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
